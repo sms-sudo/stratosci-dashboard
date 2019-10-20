@@ -11,7 +11,7 @@ class Main extends Component {
                 <h1 style={{ fontFamily: 'Consolas', color: 'white', fontSize: '6rem'}}>STRATOSCI</h1>
                 <Dropdown>
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        Choose a flight
+                        Choose a balloon
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item href="dashboard">Australia</Dropdown.Item>

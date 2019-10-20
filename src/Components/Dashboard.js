@@ -8,20 +8,16 @@ import {
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
+const BACKENDURL = "http://localhost:8000/";
 const FRAMESPERSEC = 2;
 const MapWithAMarker = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
-      defaultZoom={12}
-      defaultCenter={{ lat: 43.656761, lng: -79.380727 }}
+      defaultZoom={4}
+      defaultCenter={{ lat: 23.7996415, lng: 133.88280500 }}
     >
-      {props.showDirections ? props.line : null}
-      {props.or ? (
-        <Marker position={{ lat: props.or[0], lng: props.or[1] }} />
-      ) : null}
-      {props.des ? (
-        <Marker position={{ lat: props.des[0], lng: props.des[1] }} />
-      ) : null}
+        <Marker position={{ lat: 23.7996415, lng: 133.88280500 }} />
+
     </GoogleMap>
   ))
 );
@@ -35,11 +31,11 @@ const intervalVal = 100;
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       horizon: 37,
       nadir: 93,
-      time: new Date(2017, 3, 9, 5,40,49),
+      time: new Date(2017, 3, 9, 5, 40, 49),
       hCount: 10,
       nCount: 0,
       pause: false,
@@ -47,40 +43,47 @@ class Dashboard extends Component {
     this.handlePlay = this.handlePlay.bind(this);
     this.handlePause = this.handlePause.bind(this);
   }
-  handlePlay(){
+  handlePlay() {
     prevTime = new Date();
     this.interval = setInterval(() => {
       this.setState({
-        time: new Date(this.state.time.getTime() + intervalVal* 600),
+        time: new Date(this.state.time.getTime() + intervalVal * 600),
         hCount: this.state.hCount + 1,
         nCount: this.state.nCount + 1,
+        pause: false,
       });
-      if(horizonImgId > horizonImgEndId || this.state.pause){
+      if (horizonImgId > horizonImgEndId || this.state.pause) {
         clearInterval(this.interval);
       }
-      if(this.state.count !== 0 && this.state.nCount % 20 === 0){
-        this.setState({nadir: this.state.nadir + 1})
-      }else if(this.state.count !== 0 && this.state.hCount % 20 === 0) {
-        this.setState({horizon: this.state.horizon + 1})
+      if (this.state.count !== 0 && this.state.nCount % 20 === 0) {
+        this.setState({ nadir: this.state.nadir + 1 })
+      } else if (this.state.count !== 0 && this.state.hCount % 20 === 0) {
+        this.setState({ horizon: this.state.horizon + 1 })
       }
     }, intervalVal)
   }
 
   handlePause() {
-    this.setState({pause: true});
+    this.setState({ pause: true });
     clearInterval(this.interval);
   }
-  componentDidMount() {
-    
+  async componentDidMount() {
+    try {
+      this.data1 = await fetch(BACKENDURL, { mode: 'no-cors' });
+      const result = await this.data1.json();
+      console.log(this.data1);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
   render() {
-    const {t} = this.state;
+    const { t } = this.state;
     return (
-      <Container fluid={true} style={{ width: "100vw", padding: 0, margin: 0, color: "white"}}>
+      <Container fluid={true} style={{ width: "100vw", padding: 0, margin: 0, color: "white" }}>
         <Row>
           <Col xs={8}>
             <MapWithAMarker
@@ -111,27 +114,27 @@ class Dashboard extends Component {
             </Row>
           </Col>
         </Row>
-        <Row style={{marginTop: '1rem'}}>
-          
+        <Row style={{ marginTop: '1rem' }}>
+
           <Col>
-            <p>{"Time: " + this.state.time.getFullYear() + "/" + (this.state.time.getMonth() + 1) + "/" + 
-            this.state.time.getDate() + " " + this.state.time.getHours() + ":" + this.state.time.getMinutes() 
-            + ":" + this.state.time.getSeconds()}</p>
+            <p>{"Time: " + this.state.time.getFullYear() + "/" + (this.state.time.getMonth() + 1) + "/" +
+              this.state.time.getDate() + " " + this.state.time.getHours() + ":" + this.state.time.getMinutes()
+              + ":" + this.state.time.getSeconds()}</p>
             <p>Altitude {} </p>
             <p>Temperature {}</p>
           </Col>
-          
+
           <Col>
-              <Row style={{alignContent: "center"}}>
-                <Col xs={4}></Col>
-                <Col xs={2}>
-                  <Button onClick={this.handlePlay} variant="success">Play</Button>
+            <Row style={{ alignContent: "center" }}>
+              <Col xs={4}></Col>
+              <Col xs={2}>
+                <Button onClick={this.handlePlay} variant="success">Play</Button>
               </Col>
               <Col xs={2}>
-                  <Button onClick={this.handlePause} variant="danger">Pause</Button>
-                </Col>
-                <Col xs={4}></Col>
-              </Row>
+                <Button onClick={this.handlePause} variant="danger">Pause</Button>
+              </Col>
+              <Col xs={4}></Col>
+            </Row>
           </Col>
           <Col>
             <Button>Open Modal</Button>
