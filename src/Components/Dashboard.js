@@ -42,6 +42,7 @@ class Dashboard extends Component {
       time: new Date(2017, 3, 9, 5,40,49),
       hCount: 10,
       nCount: 0,
+      pause: false,
     }
     this.handlePlay = this.handlePlay.bind(this);
     this.handlePause = this.handlePause.bind(this);
@@ -54,7 +55,7 @@ class Dashboard extends Component {
         hCount: this.state.hCount + 1,
         nCount: this.state.nCount + 1,
       });
-      if(horizonImgId > horizonImgEndId){
+      if(horizonImgId > horizonImgEndId || this.state.pause){
         clearInterval(this.interval);
       }
       if(this.state.count !== 0 && this.state.nCount % 20 === 0){
@@ -66,6 +67,7 @@ class Dashboard extends Component {
   }
 
   handlePause() {
+    this.setState({pause: true});
     clearInterval(this.interval);
   }
   componentDidMount() {
@@ -78,7 +80,7 @@ class Dashboard extends Component {
   render() {
     const {t} = this.state;
     return (
-      <Container fluid={true} style={{ width: "100vw", padding: 0, margin: 0 }}>
+      <Container fluid={true} style={{ width: "100vw", padding: 0, margin: 0, color: "white"}}>
         <Row>
           <Col xs={8}>
             <MapWithAMarker
@@ -109,18 +111,26 @@ class Dashboard extends Component {
             </Row>
           </Col>
         </Row>
-        <Row>
+        <Row style={{marginTop: '1rem'}}>
           
           <Col>
-            <p>{"Time: " + this.state.time}</p>
+            <p>{"Time: " + this.state.time.getFullYear() + "/" + (this.state.time.getMonth() + 1) + "/" + 
+            this.state.time.getDate() + " " + this.state.time.getHours() + ":" + this.state.time.getMinutes() 
+            + ":" + this.state.time.getSeconds()}</p>
             <p>Altitude {} </p>
             <p>Temperature {}</p>
           </Col>
+          
           <Col>
-              <Row>
-                  <Button onClick={this.handlePlay}>Play</Button>
-              
-                  <Button onClick={this.handlePause}>Pause</Button>
+              <Row style={{alignContent: "center"}}>
+                <Col xs={4}></Col>
+                <Col xs={2}>
+                  <Button onClick={this.handlePlay} variant="success">Play</Button>
+              </Col>
+              <Col xs={2}>
+                  <Button onClick={this.handlePause} variant="danger">Pause</Button>
+                </Col>
+                <Col xs={4}></Col>
               </Row>
           </Col>
           <Col>

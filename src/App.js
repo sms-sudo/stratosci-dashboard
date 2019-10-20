@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Dashboard  from './Components/Dashboard';
 
+document.body.style = "background: black;";
 function App() {
   return (
     <div className="App">
@@ -12,3 +13,4 @@ function App() {
 }
 
 export default App;
+ 
