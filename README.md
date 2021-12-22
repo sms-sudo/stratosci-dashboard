@@ -1,5 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Stratosci Dashboard
+A Create React App dashboard created for Space Apps (hackathon 2019) for the Canadian Space Agency.
 
+## Table of contents
+* [General info](#general-info)
+* [Available Scripts](#available-scripts)
+* [Languages and Sources](#languages-and-sources)
+* [Credit](#credit)
+
+## General info
+CSA needs a web tool (API type) combining the telemetry data and images collected during the stratospheric balloon flight making them easy and intuitive to view/consult for scientists, the general public, kids, etc. This is a GUI that requires no tutorial and is easy to use for all age ranges, it has a backend that quickly cleans up and organizes data for display and it is an aesthetic environment that is pleasent to work in & contributes to the user's understanding. The API can easily be customized to fit the needs of higher and lower level users (e.g. scientists vs children), the users are able to open the program at any time and view real time photos, maps and graphs and despite the magnitude of the information, it is conveyed simple.
+
+The live information currently embedded in our dashboard is the 2D coordinates (x,y) for GPS tracking, NADIR images, HORIZON images, Time (hour am/pm and dd/mm/yy), and Altitude (z).
+ 
 ## Available Scripts
 
 In the project directory, you can run:
@@ -37,32 +49,13 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Languages and Sources
+Project is created with:
+* javascript
+* html
+* css
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Credit
+Project completed by Salwa Abdalla, Shirely Zhang, and Daniel Steinbok for Space Apps 2019.
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
