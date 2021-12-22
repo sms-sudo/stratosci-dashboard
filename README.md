@@ -57,5 +57,5 @@ Project is created with:
 * css
 
 ## Credit
-Project completed by Salwa Abdalla, Shirely Zhang, and Daniel Steinbok for Space Apps 2019.
+Project completed by Salwa Abdalla, Shirley Zhang, and Daniel Steinbok for Space Apps 2019.
 
